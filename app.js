@@ -80,6 +80,10 @@ app.use("/listing",listingRouter);
 app.use("/listing/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
+app.get("/", (req, res) => {
+    res.redirect("/listing");
+});
+
 // app.get("/test",async (req,res)=>{
 //         let sampleListing= new Listing({
 //             title:"My New Villa",
@@ -100,8 +104,10 @@ app.use("/",userRouter);
 //     res.send(registeredUser);
 // });
 
-app.listen(8080, () => {
-    console.log("app is listening on 8080 port");
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+    console.log(`app is listening on port ${PORT}`);
 });
 
 app.all("/{*splat}", (req, res, next) => {
